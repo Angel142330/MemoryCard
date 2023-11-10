@@ -1,0 +1,80 @@
+body {
+    background-color: #a70ebd;
+    color: white;
+}
+
+.carta-img {
+    width: 100px;
+    height: 100px;
+}
+
+
+.custom-btn {
+    background-color: #74117e;
+    border: none;
+    height: 110px;
+    width: 110px;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.8s;
+    border: 1px solid white;
+}
+
+.interrogation {
+    color: #4d0055;
+    text-shadow: 0 0 15px #ff00ea;
+    transition: transform 0.5s ease-in-out;
+}
+
+.custom-btn:hover .interrogation {
+    transform: scaleX(-1);
+    cursor: pointer;
+}
+
+.custom-btn.flipped {
+    transform: rotateY(180deg);
+}
+
+#reiniciar-btn {
+
+    background-color: #ff00ea;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#reiniciar-btn:hover {
+    background-color: #720068;
+}
+
+
+#nivel-btns {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.nivel-btn {
+    background-color: #ff00ea;
+    color: white;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.nivel-btn:hover {
+    background-color: #720068;
+}

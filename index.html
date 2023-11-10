@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="estilo.css">
+
+  <title>Juego de Memoria</title>
+</head>
+
+
+<body>
+  <main class="container">
+    <section class="section1 d-flex justify-content-center flex-column align-items-md-center ">
+      <h1 class="text-center display-4 fw-bold">Juego de Memoria</h1>
+      <div id="nivel-btns" class="mb-3">
+        <button class="nivel-btn" id="modoFacil" value="facil">Fácil</button>
+        <button class="nivel-btn" id="modoDificil" value="dificil">Difícil</button>
+      </div>
+
+      <div class="row g-3 " id="contenedor">
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4 " id="0"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="1"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class=" custom-btn rounded-4" id="2"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="3"><span class="interrogation">?</span></button>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="4"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="5"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="6"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="7"><span class="interrogation">?</span></button>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="8"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="9"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="10"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="11"><span class="interrogation">?</span></button>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="12"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="13"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="14"><span class="interrogation">?</span></button>
+        </div>
+        <div class="col-6 col-md-3">
+          <button class="custom-btn rounded-4" id="15"><span class="interrogation">?</span></button>
+        </div>
+      </div>
+    </section>
+    <section class="section2">
+      <h2 id="puntaje" class="estadisticas">Puntaje: 0</h2>
+      <h2 id="restante" class="estadisticas">Tiempo restante: 20 segundos</h2>
+      <h2 id="movimientos" class="estadisticas">Movimientos: 0</h2>
+      <button id="reiniciar-btn">Reiniciar</button>
+
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+
+</html>
