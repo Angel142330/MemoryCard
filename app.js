@@ -1,8 +1,8 @@
 let cantidadCartasDestapadas  = 0;
 let temporizadorActivo  = false;
 let paresEncontrados  = 0;
-let tiempoInicial  = 60;
-let tiempoRestante  = 60;
+let tiempoInicial  = 0;
+let tiempoRestante  = 0;
 let puntajeActual  = 0;
 let movimientosRealizados  = 0;
 let numeros = [];
@@ -12,7 +12,7 @@ let mostrarPuntajeActual  = document.getElementById("puntaje");
 let mostrarMovimientosRealizados  = document.getElementById("movimientos");
 let contenedorCartas  = document.getElementById("contenedor");
 let botonReiniciar  = document.getElementById("reiniciar-btn");
-let nivelActual = 'facil';
+let contenedorConfeti = document.getElementById("confetti-container");
 let intervaloTiempoRegresivo;
 
 
@@ -27,7 +27,7 @@ botonesCartas .forEach((boton, i) => {
 botonReiniciar .addEventListener("click", reiniciarJuego);
 
 // Función para contar el tiempo regresivo
-function contarTiempo() {
+function iniciarConteoTiempo() {
   intervaloTiempoRegresivo = setInterval(() => {
     mostrarTiempoRestante .innerHTML = `Tiempo restante: ${tiempoRestante } segundos`;
     tiempoRestante --;
@@ -52,7 +52,7 @@ function bloquearTarjetas(numeros) {
 
 function girarCarta(id) {
   if (temporizadorActivo  == false) {
-    contarTiempo();
+    iniciarConteoTiempo();
     temporizadorActivo  = true;
   }
 
@@ -93,28 +93,18 @@ function girarCarta(id) {
         } else {
           setTimeout(() => {
             // Recupera las identificaciones almacenadas para revertir la animación
-            let card1 = document.getElementById(primerId);
-            let card2 = document.getElementById(segundoId);
-            card1.classList.remove("flipped");
-            card2.classList.remove("flipped");
-            card1.innerHTML = `<span class="interrogation">?</span>`;
-            card2.innerHTML = `<span class="interrogation">?</span>`;
-            card1.disabled = false;
-            card2.disabled = false;
-            cantidadCartasDestapadas  = 0;
+            revertirGiroCartas(primerId, segundoId);
           }, 500);
         }
       }
 
-      if (paresEncontrados  == niveles[nivelActual].pares) {
+      if (paresEncontrados === niveles[nivelActual].pares) {
         clearInterval(intervaloTiempoRegresivo);
-        mostrarTiempoRestante .innerHTML = `¡Wooo! 🚀 Lograste completar el desafío en tan solo ${
-          tiempoInicial  - tiempoRestante  - 1
-        } segundos.`;
-        mostrarPuntajeActual .innerHTML = `¡Increíble! 🌟 Tu puntaje es ${puntajeActual } 🎉.`;
-        mostrarMovimientosRealizados .innerHTML = `¡Muy astuto! 🤓 Realizaste ${movimientosRealizados } movimientos estratégicos.`;
-        botonReiniciar .classList.remove("d-none");
-      }
+        mostrarTiempoRestante.innerHTML = `¡Enhorabuena! Completaste el desafío en ${tiempoInicial - tiempoRestante - 1} segundos.`;
+        mostrarMovimientosRealizados.innerHTML = `Realizaste ${movimientosRealizados} movimientos.`;
+        botonReiniciar.classList.remove("d-none");
+        celebrarVictoria();
+    }    
     }, 100);
   }
 }
@@ -142,6 +132,10 @@ function reiniciarJuego() {
     button.disabled = false;
   });
   botonReiniciar .classList.add("d-none");
+   
+  // Elimina los confettis
+  contenedorConfeti.innerHTML = '';
+
 }
 
 let niveles = {
@@ -150,8 +144,8 @@ let niveles = {
   dificil: { pares: 12, tiempo: 90 }
 };
 
-let nivelBtns = document.getElementById("nivel-btns");
-nivelBtns.addEventListener("click", function (event) {
+let botonesNivel  = document.getElementById("nivel-btns");
+botonesNivel .addEventListener("click", function (event) {
   if (event.target.classList.contains("nivel-btn")) {
     let nivel = event.target.id;
     iniciarJuego(nivel);
@@ -192,4 +186,36 @@ function iniciarJuego(nivel) {
     contenedor.appendChild(boton);
   }
   botonesCartas  = document.querySelectorAll(".custom-btn"); // Actualizamos la lista de botones
+}
+
+
+function revertirGiroCartas(id1, id2) {
+  let card1 = document.getElementById(id1);
+  let card2 = document.getElementById(id2);
+  card1.classList.remove("flipped");
+  card2.classList.remove("flipped");
+  card1.innerHTML = `<span class="interrogation">?</span>`;
+  card2.innerHTML = `<span class="interrogation">?</span>`;
+  card1.disabled = false;
+  card2.disabled = false;
+  cantidadCartasDestapadas  = 0;
+}
+
+
+
+
+function celebrarVictoria() {
+  const colores = ["#0000FF", "#FFFF00", "#00FFFF", "#7FFF00", "#FF00FF","#4B0082","#FFF5EE"]; // Puedes agregar más colores
+  
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = `${Math.random() * window.innerWidth}px`;
+        confetti.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+        confetti.style.width = `${Math.random() * 10 + 5}px`; // Tamaños variados entre 5 y 15 px
+        confetti.style.height = confetti.style.width;
+        confetti.style.animationDuration = `${Math.random() * 2 + 1}s`; // Duraciones variadas entre 1 y 3 segundos
+        confetti.style.animationDelay = `${Math.random()}s`; // Retrasos aleatorios
+        contenedorConfeti.appendChild(confetti);
+    }
 }
