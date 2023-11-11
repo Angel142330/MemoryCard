@@ -1,14 +1,18 @@
 let cartasDestapadas = 0;
 let temporizador = false;
 let pares = 0;
-let timerInicial = 20;
-let timer = 20;
+let timerInicial =60;
+let timer = 60;
 let puntaje = 0;
 let movimientos = 0;
 let mostrarTiempo = document.getElementById("restante");
 let mostrarPuntaje = document.getElementById("puntaje");
 let mostrarMovimientos = document.getElementById("movimientos");
 let contenedor = document.getElementById("contenedor");
+let reiniciarBtn = document.getElementById("reiniciar-btn");
+reiniciarBtn.addEventListener("click", reiniciarJuego);
+let nivelActual = 'facil'; 
+let tiempoRegresivo;
 
 // Baraja y asigna números a las cartas
 let numeros = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
@@ -34,8 +38,7 @@ function contarTiempo() {
       clearInterval(tiempoRegresivo);
       bloquearTarjetas(numeros);
       mostrarTiempo.innerHTML = "¡Se agotó el tiempo!";
-      // Muestra el botón de reinicio
-      reiniciarBtn.style.display = "block";
+      reiniciarBtn.classList.remove("d-none"); 
     }
   }, 1000);
 }
@@ -54,7 +57,8 @@ function girar(id) {
     contarTiempo();
     temporizador = true;
   }
-
+  
+ 
   const card = document.getElementById(id);
 
   if (!card.classList.contains("flipped")) {
@@ -62,8 +66,7 @@ function girar(id) {
     card.classList.add("flipped");
 
     setTimeout(() => {
-      card.classList.add("flipped");
-
+     
       if (cartasDestapadas == 0) {
         primeraEleccion = numeros[id];
         card.innerHTML = `<img src="./image/${primeraEleccion}.png" alt="" class="carta-img">`;
@@ -106,27 +109,24 @@ function girar(id) {
         }
       }
 
-      if (pares == 8) {
+      if (pares == niveles[nivelActual].pares) {
         clearInterval(tiempoRegresivo);
         mostrarTiempo.innerHTML = `¡Wooo! 🚀 Lograste completar el desafío en tan solo ${
           timerInicial - timer - 1
         } segundos.`;
         mostrarPuntaje.innerHTML = `¡Increíble! 🌟 Tu puntaje es ${puntaje} 🎉.`;
         mostrarMovimientos.innerHTML = `¡Muy astuto! 🤓 Realizaste ${movimientos} movimientos estratégicos.`;
-        reiniciarBtn.style.display = "block"; // Muestra el botón de reinicio
+       
       }
-    }, 100); // Tiempo de espera para voltear la carta
+    }, 100); 
   }
 }
 
-let reiniciarBtn = document.getElementById("reiniciar-btn");
-reiniciarBtn.addEventListener("click", reiniciarJuego);
+
 
 function reiniciarJuego() {
-  // Oculta el botón de reinicio
-  reiniciarBtn.style.display = "none";
-
-  // Reinicia variables
+  clearInterval(tiempoRegresivo);
+  //Reinicia variables
   cartasDestapadas = 0;
   temporizador = false;
   pares = 0;
@@ -147,6 +147,61 @@ function reiniciarJuego() {
     button.disabled = false;
   });
 
+  
 }
 
 
+let niveles = {
+  facil: { pares: 8, tiempo: 10 },
+  medio: { pares: 10, tiempo: 75 },
+  dificil: { pares: 12, tiempo: 90 }
+};
+
+
+let nivelBtns = document.getElementById("nivel-btns");
+nivelBtns.addEventListener("click", function (event) {
+    if (event.target.classList.contains("nivel-btn")) {
+        let nivel = event.target.id;
+        iniciarJuego(nivel);
+    }
+});
+
+
+function iniciarJuego(nivel) {
+  reiniciarJuego();
+  nivelActual = nivel;
+  puntaje = 0;
+  pares = 0;
+  movimientos = 0;
+  temporizador = false;
+  let configuracion = niveles[nivel];
+
+  // Genera los números para el nivel seleccionado
+  numeros = [];
+  for (let i = 1; i <= configuracion.pares; i++) {
+    numeros.push(i, i);
+  }
+  numeros = numeros.sort(() => Math.random() - 0.5);
+
+  
+  timerInicial = configuracion.tiempo;
+  timer = timerInicial;
+
+
+  let contenedor = document.getElementById("contenedor");
+  contenedor.innerHTML = ''; 
+  contenedor.className = 'grid ' + nivel;
+  for (let i = 0; i < numeros.length; i++) {
+ 
+    let boton = document.createElement("button");
+    boton.id = i;
+    boton.className = "custom-btn";
+    boton.innerHTML = `<span class="interrogation">?</span>`;
+    boton.addEventListener("click", function () {
+      girar(i);
+    });
+    contenedor.appendChild(boton);
+  }
+  botones = document.querySelectorAll(".custom-btn"); // Actualizamos la lista de botones
+  
+}

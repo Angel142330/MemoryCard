@@ -1,6 +1,6 @@
 body {
     background-color: #a70ebd;
-    color: white;
+   
 }
 
 .carta-img {
@@ -77,4 +77,24 @@ body {
 
 .nivel-btn:hover {
     background-color: #720068;
+}
+
+
+
+.grid {
+    display: grid;
+    gap: 10px;
+   
+}
+
+.grid.facil {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid.medio {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.grid.dificil {
+    grid-template-columns: repeat(6, 1fr);
 }

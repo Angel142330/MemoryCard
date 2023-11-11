@@ -13,77 +13,24 @@
 </head>
 
 
-<body>
-  <main class="container">
-    <section class="section1 d-flex justify-content-center flex-column align-items-md-center ">
+<body class="text-light ">
+  <main class="container gap-5 justify-content-center d-flex align-items-center vh-100 ">
+    <section class="section1 d-flex justify-content-center flex-column align-items-md-center me-4 ">
       <h1 class="text-center display-4 fw-bold">Juego de Memoria</h1>
       <div id="nivel-btns" class="mb-3">
-        <button class="nivel-btn" id="modoFacil" value="facil">Fácil</button>
-        <button class="nivel-btn" id="modoDificil" value="dificil">Difícil</button>
+        <button id="facil" class="nivel-btn">Modo Fácil</button>
+        <button id="medio" class="nivel-btn">Modo Medio</button>
+        <button id="dificil" class="nivel-btn">Modo Difícil</button>
       </div>
 
-      <div class="row g-3 " id="contenedor">
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4 " id="0"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="1"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class=" custom-btn rounded-4" id="2"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="3"><span class="interrogation">?</span></button>
-        </div>
-      </div>
-      <div class="row g-3">
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="4"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="5"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="6"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="7"><span class="interrogation">?</span></button>
-        </div>
-      </div>
-      <div class="row g-3">
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="8"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="9"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="10"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="11"><span class="interrogation">?</span></button>
-        </div>
-      </div>
-      <div class="row g-3">
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="12"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="13"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="14"><span class="interrogation">?</span></button>
-        </div>
-        <div class="col-6 col-md-3">
-          <button class="custom-btn rounded-4" id="15"><span class="interrogation">?</span></button>
-        </div>
-      </div>
+      <div class="row g-3 " id="contenedor"></div>
     </section>
+
     <section class="section2">
       <h2 id="puntaje" class="estadisticas">Puntaje: 0</h2>
-      <h2 id="restante" class="estadisticas">Tiempo restante: 20 segundos</h2>
+      <h2 id="restante" class="estadisticas">Tiempo restante: segundos</h2>
       <h2 id="movimientos" class="estadisticas">Movimientos: 0</h2>
-      <button id="reiniciar-btn">Reiniciar</button>
+      <button id="reiniciar-btn" class="d-none " >Reiniciar</button>
 
     </section>
   </main>
