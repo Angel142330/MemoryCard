@@ -16,7 +16,7 @@ let contenedorConfeti = document.getElementById("confetti-container");
 let intervaloTiempoRegresivo;
 
 
-// Agrega eventos de clic a los botones
+// Agrega eventos de clic a los botones de las cartas y girarlas al hacer clic
 let botonesCartas  = document.querySelectorAll(".custom-btn");
 botonesCartas .forEach((boton, i) => {
   boton.addEventListener("click", function () {
@@ -50,6 +50,7 @@ function bloquearTarjetas(numeros) {
   });
 }
 
+// Función para voltear las cartas y compararlas con las imágenes correspondientes 
 function girarCarta(id) {
   if (temporizadorActivo  == false) {
     iniciarConteoTiempo();
@@ -58,9 +59,9 @@ function girarCarta(id) {
 
   const card = document.getElementById(id);
 
-  if (!card.classList.contains("flipped")) {
+  if (!card.classList.contains("girar")) {
     // Si la clase 'flipped' no está presente, voltear la carta
-    card.classList.add("flipped");
+    card.classList.add("girar");
 
     setTimeout(() => {
 
@@ -109,6 +110,7 @@ function girarCarta(id) {
   }
 }
 
+// Reinicia el juego y las variables a sus valores iniciales
 function reiniciarJuego() {
   clearInterval(intervaloTiempoRegresivo);
   //Reinicia variables
@@ -126,8 +128,8 @@ function reiniciarJuego() {
   numeros = numeros.sort(() => Math.random() - 0.5);
 
   // Habilita los botones y restaura su contenido
-  botonesCartas .forEach((button, i) => {
-    button.classList.remove("flipped");
+  botonesCartas .forEach((button) => {
+    button.classList.remove("girar");
     button.innerHTML = `<span class="interrogation">?</span>`;
     button.disabled = false;
   });
@@ -138,12 +140,16 @@ function reiniciarJuego() {
 
 }
 
+// Niveles de dificultad en un objeto
 let niveles = {
   facil: { pares: 8, tiempo: 60 },
   medio: { pares: 10, tiempo: 75 },
   dificil: { pares: 12, tiempo: 90 }
 };
 
+
+
+//Nivel de dificultad
 let botonesNivel  = document.getElementById("nivel-btns");
 botonesNivel .addEventListener("click", function (event) {
   if (event.target.classList.contains("nivel-btn")) {
@@ -152,6 +158,7 @@ botonesNivel .addEventListener("click", function (event) {
   }
 });
 
+// Inicia el juego con el nivel seleccionado
 function iniciarJuego(nivel) {
   reiniciarJuego();
   nivelActual = nivel;
@@ -162,7 +169,6 @@ function iniciarJuego(nivel) {
   let configuracion = niveles[nivel];
 
   // Genera los números para el nivel seleccionado
-  numeros = [];
   for (let i = 1; i <= configuracion.pares; i++) {
     numeros.push(i, i);
   }
@@ -188,12 +194,12 @@ function iniciarJuego(nivel) {
   botonesCartas  = document.querySelectorAll(".custom-btn"); // Actualizamos la lista de botones
 }
 
-
+//da vuelta las cartas
 function revertirGiroCartas(id1, id2) {
   let card1 = document.getElementById(id1);
   let card2 = document.getElementById(id2);
-  card1.classList.remove("flipped");
-  card2.classList.remove("flipped");
+  card1.classList.remove("girar");
+  card2.classList.remove("girar");
   card1.innerHTML = `<span class="interrogation">?</span>`;
   card2.innerHTML = `<span class="interrogation">?</span>`;
   card1.disabled = false;
@@ -201,11 +207,8 @@ function revertirGiroCartas(id1, id2) {
   cantidadCartasDestapadas  = 0;
 }
 
-
-
-
 function celebrarVictoria() {
-  const colores = ["#0000FF", "#FFFF00", "#00FFFF", "#7FFF00", "#FF00FF","#4B0082","#FFF5EE"]; // Puedes agregar más colores
+  const colores = ["#0000FF", "#FFFF00", "#00FFFF", "#7FFF00", "#FF00FF","#4B0082","#FFF5EE"];
   
     for (let i = 0; i < 100; i++) {
         const confetti = document.createElement("div");
